@@ -11,8 +11,12 @@
     <Project Path="Infrastructure/Alma.DiscordBot.Api.Infrastructure/Alma.DiscordBot.Api.Infrastructure.csproj" Id="7ee1d7e1-f056-47ea-a4ac-1c71710b9692" />
   </Folder>
   <Folder Name="/Presentation/" />
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
   <Folder Name="/Tests/">
     <Project Path="Tests/Alma.DiscordBot.Api.Application.Tests/Alma.DiscordBot.Api.Application.Tests.csproj" Id="402e63ce-d588-4ad9-9559-ab4b660bc918" />
+    <Project Path="Tests/Alma.DiscordBot.Api.Core.Abstractions.Tests/Alma.DiscordBot.Api.Core.Abstractions.Tests.csproj" Id="e03d2f42-e6f2-493b-a90e-01fdeb437eba" />
     <Project Path="Tests/Alma.DiscordBot.Api.Core.Domain.Tests/Alma.DiscordBot.Api.Core.Domain.Tests.csproj" Id="dcd7fde9-06d2-41fd-ae8f-c08615519778" />
     <Project Path="Tests/Alma.DiscordBot.Api.Infrastructure.Tests/Alma.DiscordBot.Api.Infrastructure.Tests.csproj" Id="8bc45bcd-646a-41fc-bd42-a3fcf782afcd" />
   </Folder>
