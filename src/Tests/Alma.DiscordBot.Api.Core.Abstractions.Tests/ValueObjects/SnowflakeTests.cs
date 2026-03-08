@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // <copyright file="Snowflake.cs" company="ALMA Esports Discord Bot Api">
-// Copyright (c) ALMA Esports Discord Bot Api. All rights reserved.
+//   Copyright (c) ALMA Esports Discord Bot Api. All rights reserved.
 // </copyright>
 // <author>iMeanBkli</author>
 // <created>2026-03-07</created>
@@ -95,7 +95,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenExplicitlyConvertedToLong_ShouldReturnValue()
+        public void Snowflake_WhenExplicitlyConvertedFromLong_ShouldReturnValue()
         {
             var target = (Snowflake)123456789L;
 
