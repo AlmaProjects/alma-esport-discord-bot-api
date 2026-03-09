@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
-// <copyright file="Snowflake.cs" company="ALMA Esports Discord Bot Api">
-//   Copyright (c) ALMA Esports Discord Bot Api. All rights reserved.
+// <copyright file="Snowflake.cs" company="Alma.DiscordBot.Api.Core.Abstractions">
+//   Copyright (c) Alma.DiscordBot.Api.Core.Abstractions All rights reserved.
 // </copyright>
 // <author>iMeanBkli</author>
 // <created>2026-03-07</created>
@@ -9,14 +9,19 @@
 namespace Alma.DiscordBot.Api.Core.Abstractions.ValueObjects
 {
     /// <summary>
-    /// Represents a Discord Snowflake identifier - a 64-bit unique ID
+    /// Represents a Discord Snowflake identifier — a 64-bit unique ID
     /// used by Discord to identify users, guilds, channels, and messages.
     /// </summary>
     /// <remarks>
-    /// A Snowflake is guaranteed to be positive and non-zero.
+    /// A Snowflake is guaranteed to be strictly positive and non-zero.
     /// It encodes a timestamp, worker ID, and sequence number,
     /// making it both unique and time-sortable.
-    /// See <see href="https://discord.com/developers/docs/reference#snowflakes">Discord Documentation</see>
+    /// <para>
+    /// See the official Discord documentation:
+    /// <see href="https://discord.com/developers/docs/reference#snowflakes">
+    /// Discord Snowflake Reference
+    /// </see>
+    /// </para>
     /// </remarks>
     /// <example>
     /// Creating a Snowflake from a Discord user ID:
@@ -25,17 +30,22 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.ValueObjects
     /// long raw = userId; // implicit conversion
     /// </code>
     /// </example>
+    /// <seealso cref="Uuid"/>
     public readonly struct Snowflake : IId, IEquatable<Snowflake>
     {
+        // -------------------------------------------------------------------------
+        // Constructor
+        // -------------------------------------------------------------------------
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="Snowflake" /> struct
+        /// Initializes a new instance of the <see cref="Snowflake"/> struct
         /// with the specified raw value.
         /// </summary>
         /// <param name="value">
         /// The raw 64-bit Discord Snowflake value. Must be strictly positive.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// Thrown when <paramref name="value" /> is zero or negative.
+        /// Thrown when <paramref name="value"/> is zero or negative.
         /// </exception>
         public Snowflake(long value) 
         {
@@ -47,38 +57,87 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.ValueObjects
             Value = value;
         }
 
+        // -------------------------------------------------------------------------
+        // Properties
+        // -------------------------------------------------------------------------
+
         /// <summary>
-        /// Gets the raw 64-bit value of the Snowflake identifier.
+        /// Gets the raw 64-bit value of this <see cref="Snowflake"/> identifier.
         /// </summary>
         /// <value>
-        /// A positive <see cref="long" /> representing the Discord-assigned ID.
+        /// A strictly positive <see cref="long"/> representing the Discord-assigned ID.
         /// </value>
         public long Value { get; }
 
+        // -------------------------------------------------------------------------
+        // Equality
+        // -------------------------------------------------------------------------
+
         /// <summary>
-        /// Determines whether the current Snowflake is equal to another Snowflake.
+        /// Determines whether the current <see cref="Snowflake"/> is equal
+        /// to another <see cref="Snowflake"/>.
         /// </summary>
         /// <param name="other">
         /// The <see cref="Snowflake"/> to compare with the current instance.
         /// </param>
         /// <returns>
-        /// <see langword="true" /> if both Snowflakes share the same value;
-        /// otherwise <see langword="false" />.
+        /// <see langword="true"/> if both instances share the same value;
+        /// otherwise <see langword="false"/>.
         /// </returns>
         public bool Equals(Snowflake other) => Value == other.Value;
 
+        /// <inheritdoc/>
         public override bool Equals(object? obj) => obj is Snowflake other && Equals(other);
 
+        /// <inheritdoc/>
         public override int GetHashCode() => Value.GetHashCode();
 
+        /// <inheritdoc/>
         public override string ToString() => Value.ToString();
 
+        // -------------------------------------------------------------------------
+        // Operators
+        // -------------------------------------------------------------------------
+
+        /// <summary>
+        /// Implicitly converts a <see cref="Snowflake"/> to its raw <see cref="long"/> value.
+        /// </summary>
+        /// <param name="snowflake">The <see cref="Snowflake"/> to convert.</param>
+        /// <returns>The raw underlying <see cref="long"/> value.</returns>
         public static implicit operator long(Snowflake snowflake) => snowflake.Value;
 
+        /// <summary>
+        /// Explicitly converts a <see cref="long"/> to a <see cref="Snowflake"/>.
+        /// </summary>
+        /// <param name="value">
+        /// The raw value to convert. Must be strictly positive.
+        /// </param>
+        /// <returns>A new <see cref="Snowflake"/> wrapping the provided value.</returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown when <paramref name="value"/> is zero or negative.
+        /// </exception>
         public static explicit operator Snowflake(long value) => new(value);
 
+        /// <summary>
+        /// Determines whether two <see cref="Snowflake"/> instances are equal.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>
+        /// <see langword="true"/> if both instances are equal;
+        /// otherwise <see langword="false"/>.
+        /// </returns>
         public static bool operator ==(Snowflake left, Snowflake right) => left.Equals(right);
 
+        /// <summary>
+        /// Determines whether two <see cref="Snowflake"/> instances are not equal.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>
+        /// <see langword="true"/> if both instances differ;
+        /// otherwise <see langword="false"/>.
+        /// </returns>
         public static bool operator !=(Snowflake left, Snowflake right) => !left.Equals(right);
     }
 }
