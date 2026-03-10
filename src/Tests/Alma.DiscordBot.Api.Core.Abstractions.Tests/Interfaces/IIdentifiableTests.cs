@@ -32,19 +32,45 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
         [Fact]
         public void IIdentifiable_WhenImplementedWithSnowflake_ShouldExposeId()
         {
-            Snowflake expectedId = new(123456789L);
-            FakeSnowflakeEntity entity = new(expectedId);
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
 
-            entity.Id.Should().Be(expectedId);
+            Snowflake expectedId = new(123456789L);
+
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+            IIdentifiable<Snowflake> target = new FakeSnowflakeEntity(expectedId);
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.Id.Should().Be(expectedId);
         }
 
         [Fact]
         public void IIdentifiable_WhenImplementedWithGuid_ShouldExposeId()
         {
-            var expectedId = new Uuid();
-            FakeUuidEntity entity = new(expectedId);
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
 
-            entity.Id.Should().Be(expectedId);
+            Uuid expectedId = new();
+
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+             IIdentifiable<Uuid> target = new FakeUuidEntity(expectedId);
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.Id.Should().Be(expectedId);
         }
     }
 }

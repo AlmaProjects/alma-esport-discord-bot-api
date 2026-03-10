@@ -39,11 +39,12 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Interfaces
         /// Retrieves an entity by its unique identifier.
         /// </summary>
         /// <param name="id">The unique identifier of the entity to retrieve.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>
         /// A <see cref="Task{TResult}"/> representing the asynchronous operation,
         /// containing the matching <typeparamref name="TEntity"/> if found;
         /// otherwise <see langword="null"/>
         /// </returns>
-        public Task<TEntity?> GetByIdAsync(TId id);
+        public Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken);
     }
 }

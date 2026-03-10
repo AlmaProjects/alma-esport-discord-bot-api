@@ -14,7 +14,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
 {
     public sealed class ISoftDeletableTests
     {
-        private sealed class FakeSoftDeletableEntity : ISoftDeletable
+        internal sealed class FakeSoftDeletableEntity : ISoftDeletable
         {
             public bool IsActive { get; private set; } = true;
 
@@ -28,6 +28,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
                 }
 
                 IsActive = true;
+                DeletedAt = null;
             }
 
             public void Deactivate()
@@ -43,51 +44,129 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
         }
 
         // -------------------------------------------------------------------------
-        // Constructor
+        // Activate
         // -------------------------------------------------------------------------
 
         [Fact]
         public void ISoftDeletable_WhenCreated_ShouldBeActive()
         {
-            FakeSoftDeletableEntity entity = new();
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
 
-            entity.IsActive.Should().BeTrue();
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+            ISoftDeletable target = new FakeSoftDeletableEntity();
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.IsActive.Should().BeTrue();
+            target.DeletedAt.Should().BeNull();
         }
 
         [Fact]
-        public void ISoftDeletable_WhenCreated_ShouldHaveNullDeletedAt()
+        public void ISoftDeletable_WhenActivatedWhileAlreadyActive_ShouldHaveNoEffect()
         {
-            FakeSoftDeletableEntity entity = new();
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
 
-            entity.Activate();
+            ISoftDeletable target = new FakeSoftDeletableEntity();
 
-            entity.DeletedAt.Should().BeNull();
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+            target.Activate();
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.IsActive.Should().BeTrue();
+            target.DeletedAt.Should().BeNull();
+        }
+
+        [Fact]
+        public void ISoftDeletable_WhenActivatedAfterDeactivation_ShouldBeActive()
+        {
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
+
+            ISoftDeletable target = new FakeSoftDeletableEntity();
+            target.Deactivate();
+
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+            target.Activate();
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.IsActive.Should().BeTrue();
+            target.DeletedAt.Should().BeNull();
         }
 
         // -------------------------------------------------------------------------
-        // Soft delete
+        // Deactivate
         // -------------------------------------------------------------------------
 
         [Fact]
-        public void ISoftDeletable_WhenDeleted_ShouldBeInactive()
+        public void ISoftDeletable_WhenDeactivated_ShouldBeInactive()
         {
-            FakeSoftDeletableEntity entity = new();
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
 
-            entity.Activate();
-            entity.Deactivate();
+            ISoftDeletable target = new FakeSoftDeletableEntity();
+            DateTime beforeDeactivation = DateTime.UtcNow;
 
-            entity.IsActive.Should().BeFalse();
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+            target.Deactivate();
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.IsActive.Should().BeFalse();
+            target.DeletedAt.Should().NotBeNull();
+            target.DeletedAt.Should().BeOnOrAfter(beforeDeactivation);
         }
 
         [Fact]
-        public void ISoftDeletable_WhenDeleted_ShouldNotHaveNullDeletedAt()
+        public void ISoftDeletable_WhenDeactivatedWhileAlreadyInactive_ShouldHaveNoEffect()
         {
-            FakeSoftDeletableEntity entity = new();
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
 
-            entity.Activate();
-            entity.Deactivate();
+            ISoftDeletable target = new FakeSoftDeletableEntity();
+            target.Deactivate();
+            DateTime? firstDeletedAt = target.DeletedAt;
 
-            entity.DeletedAt.Should().NotBeNull();
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+            target.Deactivate();
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.IsActive.Should().BeFalse();
+            target.DeletedAt.Should().Be(firstDeletedAt);
         }
     }
 }

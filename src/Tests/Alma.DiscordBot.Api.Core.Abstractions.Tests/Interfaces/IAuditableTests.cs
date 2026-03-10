@@ -22,43 +22,106 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
         }
 
         // -------------------------------------------------------------------------
-        // Constructor
+        // CreatedAt
         // -------------------------------------------------------------------------
 
         [Fact]
-        public void IAuditable_WhenCreated_ShouldHaveCreatedAt()
+        public void IAuditable_WhenCreated_ShouldExposeCreatedAt()
         {
-            DateTime now = DateTime.UtcNow;
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
 
-            FakeAuditableEntity entity = new() { CreatedAt = now };
+            DateTime expectedCreatedAt = DateTime.UtcNow;
 
-            entity.CreatedAt.Should().Be(now);
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+            FakeAuditableEntity target = new() { CreatedAt = expectedCreatedAt };
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.CreatedAt.Should().Be(expectedCreatedAt);
         }
 
         // -------------------------------------------------------------------------
-        // Properties
+        // UpdatedAt
         // -------------------------------------------------------------------------
 
         [Fact]
-        public void IAuditable_WhenNotUpdated_ShouldHaveNullUpdatedAt()
+        public void IAuditable_WhenCreated_CreatedAtShouldBeBeforeOrEqualUpdatedAt()
         {
-            FakeAuditableEntity entity = new() { CreatedAt = DateTime.UtcNow };
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
 
-            entity.UpdatedAt.Should().BeNull();
+            DateTime createdAt = DateTime.UtcNow;
+            DateTime updatedAt = createdAt.AddSeconds(1);
+
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+            FakeAuditableEntity target = new()
+            {
+                CreatedAt = createdAt,
+                UpdatedAt = updatedAt
+            };
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.CreatedAt.Should().BeOnOrBefore(target.UpdatedAt!.Value);
         }
 
         [Fact]
-        public void IAuditable_WhenUpdated_ShouldHaveUpdatedAt()
+        public void IAuditable_WhenNeverUpdated_UpdatedAtShouldBeNull()
         {
-            DateTime updatedAt = DateTime.UtcNow.AddHours(1);
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            // -------------------------------------
+            // Act
+            // -------------------------------------
+
+            FakeAuditableEntity target = new() { CreatedAt = DateTime.UtcNow };
+
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            target.UpdatedAt.Should().BeNull();
+        }
+
+        [Fact]
+        public void IAuditable_WhenUpdated_ShouldExposeUpdatedAt()
+        {
+            // -------------------------------------
+            // Arrange
+            // -------------------------------------
+
+            DateTime expectedUpdatedAt = DateTime.UtcNow;
+
+            // -------------------------------------
+            // Act
+            // -------------------------------------
 
             FakeAuditableEntity entity = new()
             {
                 CreatedAt = DateTime.UtcNow,
-                UpdatedAt = updatedAt
+                UpdatedAt = expectedUpdatedAt
             };
 
-            entity.UpdatedAt.Should().Be(updatedAt);
+            // -------------------------------------
+            // Assert
+            // -------------------------------------
+
+            entity.UpdatedAt.Should().Be(expectedUpdatedAt);
         }
     }
 }
