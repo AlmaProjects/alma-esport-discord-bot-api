@@ -16,7 +16,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
     {
         private sealed class FakeSoftDeletableEntity : ISoftDeletable
         {
-            public bool IsActive { get; private set; }
+            public bool IsActive { get; private set; } = true;
 
             public DateTime? DeletedAt { get; private set; }
 
