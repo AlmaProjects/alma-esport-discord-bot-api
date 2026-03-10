@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
-// <copyright file="Snowflake.cs" company="ALMA Esports Discord Bot Api">
-//   Copyright (c) ALMA Esports Discord Bot Api. All rights reserved.
+// <copyright file="IIdentifiableTests.cs" company="Alma.DiscordBot.Api.Core.Abstractions.Tests">
+//   Copyright (c) Alma.DiscordBot.Api.Core.Abstractions.Tests All rights reserved.
 // </copyright>
 // <author>iMeanBkli</author>
 // <created>2026-03-07</created>
@@ -15,14 +15,19 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
 {
     public sealed class IIdentifiableTests
     {
-        // -------------------------------------------------------------------------
-        // Construction
-        // -------------------------------------------------------------------------
-
         private sealed class FakeSnowflakeEntity(Snowflake id) : IIdentifiable<Snowflake>
         {
             public Snowflake Id { get; init; } = id;
         }
+
+        private sealed class FakeUuidEntity(Uuid uuid) : IIdentifiable<Uuid>
+        {
+            public Uuid Id { get; init; } = uuid;
+        }
+
+        // -------------------------------------------------------------------------
+        // Constructor
+        // -------------------------------------------------------------------------
 
         [Fact]
         public void IIdentifiable_WhenImplementedWithSnowflake_ShouldExposeId()
@@ -31,11 +36,6 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
             FakeSnowflakeEntity entity = new(expectedId);
 
             entity.Id.Should().Be(expectedId);
-        }
-
-        private sealed class FakeUuidEntity(Uuid uuid) : IIdentifiable<Uuid>
-        {
-            public Uuid Id { get; init; } = uuid;
         }
 
         [Fact]

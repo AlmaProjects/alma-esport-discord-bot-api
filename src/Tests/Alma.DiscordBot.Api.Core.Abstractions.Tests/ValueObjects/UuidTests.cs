@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
-// <copyright file="Snowflake.cs" company="ALMA Esports Discord Bot Api">
-//   Copyright (c) ALMA Esports Discord Bot Api. All rights reserved.
+// <copyright file="UuidTests.cs" company="Alma.DiscordBot.Api.Core.Abstractions.Tests">
+//   Copyright (c) Alma.DiscordBot.Api.Core.Abstractions.Tests All rights reserved.
 // </copyright>
 // <author>iMeanBkli</author>
 // <created>2026-03-08</created>
@@ -14,7 +14,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
     public sealed class UuidTests
     {
         // -------------------------------------------------------------------------
-        // Construction
+        // Constructor
         // -------------------------------------------------------------------------
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         // -------------------------------------------------------------------------
-        // Égalité
+        // Equality
         // -------------------------------------------------------------------------
 
         [Fact]
@@ -72,7 +72,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         // -------------------------------------------------------------------------
-        // Conversions
+        // Operators
         // -------------------------------------------------------------------------
 
         [Fact]

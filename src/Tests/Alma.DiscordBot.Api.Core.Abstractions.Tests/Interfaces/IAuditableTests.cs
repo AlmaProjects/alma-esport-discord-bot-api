@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
-// <copyright file="Snowflake.cs" company="ALMA Esports Discord Bot Api">
-//   Copyright (c) $projectname$. All rights reserved.
+// <copyright file="IAuditableTests.cs" company="Alma.DiscordBot.Api.Core.Abstractions.Tests">
+//   Copyright (c) Alma.DiscordBot.Api.Core.Abstractions.Tests All rights reserved.
 // </copyright>
 // <author>iMeanBkli</author>
 // <created>2026-03-08</created>
@@ -21,6 +21,10 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
             public DateTime? UpdatedAt { get; set; }
         }
 
+        // -------------------------------------------------------------------------
+        // Constructor
+        // -------------------------------------------------------------------------
+
         [Fact]
         public void IAuditable_WhenCreated_ShouldHaveCreatedAt()
         {
@@ -30,6 +34,10 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
 
             entity.CreatedAt.Should().Be(now);
         }
+
+        // -------------------------------------------------------------------------
+        // Properties
+        // -------------------------------------------------------------------------
 
         [Fact]
         public void IAuditable_WhenNotUpdated_ShouldHaveNullUpdatedAt()
