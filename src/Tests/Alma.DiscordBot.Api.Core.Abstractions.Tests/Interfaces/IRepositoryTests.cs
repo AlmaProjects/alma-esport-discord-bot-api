@@ -44,7 +44,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.Interfaces
             // Act
             // -------------------------------------
 
-            FakeEntity? result = await repository.GetByIdAsync(entity.Id, Arg.Any<CancellationToken>());
+            FakeEntity? result = await repository.GetByIdAsync(entity.Id, TestContext.Current.CancellationToken);
 
             // -------------------------------------
             // Assert
