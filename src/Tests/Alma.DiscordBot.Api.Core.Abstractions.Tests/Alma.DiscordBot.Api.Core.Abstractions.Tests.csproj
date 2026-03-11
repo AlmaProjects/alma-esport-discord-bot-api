@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Alma.DiscordBot.Api.Core.Domain\Alma.DiscordBot.Api.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\Alma.DiscordBot.Api.Core.Abstractions\Alma.DiscordBot.Api.Core.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
