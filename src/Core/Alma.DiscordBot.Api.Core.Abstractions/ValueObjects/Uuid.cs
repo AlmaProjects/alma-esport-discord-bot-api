@@ -32,7 +32,9 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.ValueObjects
     /// var uuid = new Uuid(existingGuid);
     /// </code>
     /// </example>
+    /// <seealso cref="IId"/>
     /// <seealso cref="Snowflake"/>
+    /// <seealso cref="SurrogateId"/>
     public readonly struct Uuid : IId, IEquatable<Uuid>
     {
         // -------------------------------------------------------------------------
