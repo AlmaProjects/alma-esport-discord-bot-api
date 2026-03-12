@@ -1,9 +1,9 @@
 // -----------------------------------------------------------------------------
-// <copyright file="SnowflakeTests.cs" company="Alma.DiscordBot.Api.Core.Abstractions.Tests">
-//   Copyright (c) Alma.DiscordBot.Api.Core.Abstractions.Tests All rights reserved.
+// <copyright file="SurrogateIdTests.cs" company="$projectname$">
+//   Copyright (c) $projectname$. All rights reserved.
 // </copyright>
-// <author>iMeanBkli</author>
-// <created>2026-03-07</created>
+// <author>$author$</author>
+// <created>12/03/2026</created>
 // -----------------------------------------------------------------------------
 
 using Alma.DiscordBot.Api.Core.Abstractions.ValueObjects;
@@ -12,17 +12,17 @@ using FluentAssertions;
 
 namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
 {
-    public sealed class SnowflakeTests
+    public sealed class SurrogateIdTests
     {
-        private const long VALID_SNOWFLAKE_VALUE = 123_456_789L;
-        private const long ANOTHER_VALID_SNOWFLAKE_VALUE = 987_654_321L;
+        private const int VALID_SURROGATE_ID_VALUE = 1;
+        private const int ANOTHER_VALID_SURROGATE_ID_VALUE = 2;
 
         // -------------------------------------------------------------------------
         // Constructor
         // -------------------------------------------------------------------------
 
         [Fact]
-        public void Snowflake_WhenCreatedFromNegativeValue_ShouldThrowArgumentException()
+        public void SurrogateId_WhenCreatedFromNegativeValue_ShouldThrowArgumentException()
         {
             // -------------------------------------
             // Arrange
@@ -32,7 +32,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
             // Act
             // -------------------------------------
 
-            Action act = () => new Snowflake(-1L);
+            Action act = () => new SurrogateId(-1);
 
             // -------------------------------------
             // Assert
@@ -42,7 +42,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenCreatedFromZero_ShouldThrowArgumentException()
+        public void SurrogateId_WhenCreatedFromZero_ShouldThrowArgumentException()
         {
             // -------------------------------------
             // Arrange
@@ -52,7 +52,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
             // Act
             // -------------------------------------
 
-            Action act = () => new Snowflake(0L);
+            Action act = () => new SurrogateId(0);
 
             // -------------------------------------
             // Assert
@@ -62,29 +62,27 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenCreatedFromValueBelowMinimum_ShouldThrowArgumentException()
+        public void SurrogateId_WhenCreatedFromValidInt_ShouldStoreValue()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            const long HIGHEST_INVALID_SNOWFLAKE_ID_VALUE = Snowflake.DISCORD_FIRST_SNOWFLAKE_ID - 1;
-
             // -------------------------------------
             // Act
             // -------------------------------------
 
-            Action act = () => new Snowflake(HIGHEST_INVALID_SNOWFLAKE_ID_VALUE);
+            SurrogateId target = new(VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Assert
             // -------------------------------------
 
-            act.Should().Throw<ArgumentException>().WithParameterName("value");
+            target.Value.Should().Be(VALID_SURROGATE_ID_VALUE);
         }
 
         [Fact]
-        public void Snowflake_WhenCreatedFromFirstValidValue_ShouldStoreValue()
+        public void SurrogateId_WhenCreatedFromIntMaxValue_ShouldStoreValue()
         {
             // -------------------------------------
             // Arrange
@@ -94,33 +92,13 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
             // Act
             // -------------------------------------
 
-            Snowflake target = new(Snowflake.DISCORD_FIRST_SNOWFLAKE_ID);
+            SurrogateId target = new(int.MaxValue);
 
             // -------------------------------------
             // Assert
             // -------------------------------------
 
-            target.Value.Should().Be(Snowflake.DISCORD_FIRST_SNOWFLAKE_ID);
-        }
-
-        [Fact]
-        public void Snowflake_WhenCreatedFromValidLong_ShouldStoreValue()
-        {
-            // -------------------------------------
-            // Arrange
-            // -------------------------------------
-
-            // -------------------------------------
-            // Act
-            // -------------------------------------
-
-            Snowflake target = new(VALID_SNOWFLAKE_VALUE);
-
-            // -------------------------------------
-            // Assert
-            // -------------------------------------
-
-            target.Value.Should().Be(VALID_SNOWFLAKE_VALUE);
+            target.Value.Should().Be(int.MaxValue);
         }
 
         // -------------------------------------------------------------------------
@@ -128,29 +106,29 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         // -------------------------------------------------------------------------
 
         [Fact]
-        public void Snowflake_WhenImplicitlyConvertedToLong_ShouldReturnValue()
+        public void SurrogateId_WhenImplicitlyConvertedToInt_ShouldReturnValue()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake target = new(VALID_SNOWFLAKE_VALUE);
+            SurrogateId source = new(VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
             // -------------------------------------
 
-            long result = target;
+            int target = source;
 
             // -------------------------------------
             // Assert
             // -------------------------------------
 
-            result.Should().Be(VALID_SNOWFLAKE_VALUE);
+            target.Should().Be(VALID_SURROGATE_ID_VALUE);
         }
 
         [Fact]
-        public void Snowflake_WhenExplicitlyConvertedFromLong_ShouldReturnValue()
+        public void SurrogateId_WhenExplicitlyConvertedFromInt_ShouldReturnValue()
         {
             // -------------------------------------
             // Arrange
@@ -160,13 +138,13 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
             // Act
             // -------------------------------------
 
-            var target = (Snowflake)VALID_SNOWFLAKE_VALUE;
+            var target = (SurrogateId)VALID_SURROGATE_ID_VALUE;
 
             // -------------------------------------
             // Assert
             // -------------------------------------
 
-            target.Value.Should().Be(VALID_SNOWFLAKE_VALUE);
+            target.Value.Should().Be(VALID_SURROGATE_ID_VALUE);
         }
 
         // -------------------------------------------------------------------------
@@ -174,14 +152,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         // -------------------------------------------------------------------------
 
         [Fact]
-        public void Snowflake_WhenComparedToSameValue_ShouldBeEqual()
+        public void SurrogateId_WhenComparedToSameValue_ShouldBeEqual()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake first = new(VALID_SNOWFLAKE_VALUE);
-            Snowflake second = new(VALID_SNOWFLAKE_VALUE);
+            SurrogateId first = new(VALID_SURROGATE_ID_VALUE);
+            SurrogateId second = new(VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -197,14 +175,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenComparedToDifferentValue_ShouldNotBeEqual()
+        public void SurrogateId_WhenComparedToDifferentValue_ShouldNotBeEqual()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake first = new(VALID_SNOWFLAKE_VALUE);
-            Snowflake second = new(ANOTHER_VALID_SNOWFLAKE_VALUE);
+            SurrogateId first = new(VALID_SURROGATE_ID_VALUE);
+            SurrogateId second = new(ANOTHER_VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -220,14 +198,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenComparedToSameValueUsingEqualityOperator_ShouldBeTrue()
+        public void SurrogateId_WhenComparedToSameValueUsingEqualityOperator_ShouldBeTrue()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake first = new(VALID_SNOWFLAKE_VALUE);
-            Snowflake second = new(VALID_SNOWFLAKE_VALUE);
+            SurrogateId first = new(VALID_SURROGATE_ID_VALUE);
+            SurrogateId second = new(VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -243,14 +221,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenComparedToDifferentValueUsingEqualityOperator_ShouldBeFalse()
+        public void SurrogateId_WhenComparedToDifferentValueUsingEqualityOperator_ShouldBeFalse()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake first = new(VALID_SNOWFLAKE_VALUE);
-            Snowflake second = new(ANOTHER_VALID_SNOWFLAKE_VALUE);
+            SurrogateId first = new(VALID_SURROGATE_ID_VALUE);
+            SurrogateId second = new(ANOTHER_VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -266,14 +244,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenComparedToSameValueUsingInequalityOperator_ShouldBeFalse()
+        public void SurrogateId_WhenComparedToSameValueUsingInequalityOperator_ShouldBeFalse()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake first = new(VALID_SNOWFLAKE_VALUE);
-            Snowflake second = new(VALID_SNOWFLAKE_VALUE);
+            SurrogateId first = new(VALID_SURROGATE_ID_VALUE);
+            SurrogateId second = new(VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -289,14 +267,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenComparedToDifferentValueUsingInequalityOperator_ShouldBeTrue()
+        public void SurrogateId_WhenComparedToDifferentValueUsingInequalityOperator_ShouldBeTrue()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake first = new(VALID_SNOWFLAKE_VALUE);
-            Snowflake second = new(ANOTHER_VALID_SNOWFLAKE_VALUE);
+            SurrogateId first = new(VALID_SURROGATE_ID_VALUE);
+            SurrogateId second = new(ANOTHER_VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -316,13 +294,13 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         // -------------------------------------------------------------------------
 
         [Fact]
-        public void Snowflake_WhenComparedToNullUsingEquals_ShouldBeFalse()
+        public void SurrogateId_WhenComparedToNullUsingEquals_ShouldBeFalse()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake target = new(VALID_SNOWFLAKE_VALUE);
+            SurrogateId target = new(VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -338,13 +316,13 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenComparedToDifferentObjectTypeUsingEquals_ShouldBeFalse()
+        public void SurrogateId_WhenComparedToDifferentObjectTypeUsingEquals_ShouldBeFalse()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake target = new(VALID_SNOWFLAKE_VALUE);
+            SurrogateId target = new(VALID_SURROGATE_ID_VALUE);
             object obj = new();
 
             // -------------------------------------
@@ -361,14 +339,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenComparedToSameSnowflakeUsingEquals_ShouldBeTrue()
+        public void SurrogateId_WhenComparedToSameSurrogateIdUsingEquals_ShouldBeTrue()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake target = new(VALID_SNOWFLAKE_VALUE);
-            object obj = new Snowflake(VALID_SNOWFLAKE_VALUE);
+            SurrogateId target = new(VALID_SURROGATE_ID_VALUE);
+            object obj = new SurrogateId(VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -384,14 +362,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenComparedToDifferentSnowflakeUsingEquals_ShouldBeFalse()
+        public void SurrogateId_WhenComparedToDifferentSurrogateIdUsingEquals_ShouldBeFalse()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake target = new(VALID_SNOWFLAKE_VALUE);
-            object obj = new Snowflake(ANOTHER_VALID_SNOWFLAKE_VALUE);
+            SurrogateId target = new(VALID_SURROGATE_ID_VALUE);
+            object obj = new SurrogateId(ANOTHER_VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -411,13 +389,13 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         // -------------------------------------------------------------------------
 
         [Fact]
-        public void Snowflake_WhenHashCodeCalledTwiceOnSameInstance_ShouldReturnSameValue()
+        public void SurrogateId_WhenHashCodeCalledTwiceOnSameInstance_ShouldReturnSameValue()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake target = new(VALID_SNOWFLAKE_VALUE);
+            SurrogateId target = new(VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -434,14 +412,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
 
         [Fact]
-        public void Snowflake_WhenTwoEqualSnowflakes_ShouldReturnSameHashCode()
+        public void SurrogateId_WhenTwoEqualSurrogateIds_ShouldReturnSameHashCode()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake first = new(VALID_SNOWFLAKE_VALUE);
-            Snowflake second = new(VALID_SNOWFLAKE_VALUE);
+            SurrogateId first = new(VALID_SURROGATE_ID_VALUE);
+            SurrogateId second = new(VALID_SURROGATE_ID_VALUE);
 
             // -------------------------------------
             // Act
@@ -462,14 +440,14 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         // -------------------------------------------------------------------------
 
         [Fact]
-        public void Snowflake_WhenConvertedToString_ShouldReturnRawValueString()
+        public void SurrogateId_WhenConvertedToString_ShouldReturnRawValueString()
         {
             // -------------------------------------
             // Arrange
             // -------------------------------------
 
-            Snowflake target = new(VALID_SNOWFLAKE_VALUE);
-            string expected = VALID_SNOWFLAKE_VALUE.ToString();
+            SurrogateId target = new(VALID_SURROGATE_ID_VALUE);
+            string expected = VALID_SURROGATE_ID_VALUE.ToString();
 
             // -------------------------------------
             // Act
@@ -485,4 +463,3 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Tests.ValueObjects
         }
     }
 }
-
