@@ -40,6 +40,6 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.Interfaces
         /// entity has never been updated.
         /// otherwise <see langword="null" />.
         /// </value>
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; }
     }
 }
