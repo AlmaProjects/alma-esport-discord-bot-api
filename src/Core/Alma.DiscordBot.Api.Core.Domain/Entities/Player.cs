@@ -1,13 +1,14 @@
 // -----------------------------------------------------------------------------
-// <copyright file="Player.cs" company="$projectname$">
-//   Copyright (c) $projectname$. All rights reserved.
+// <copyright file="AuditLog.cs" company="Alma.DiscordBot.Api.Core.Domain">
+//   Copyright (c) Alma.DiscordBot.Api.Core.Domain All rights reserved.
 // </copyright>
-// <author>$author$</author>
-// <created>13/03/2026 16:12:06</created>
+// <author>iMeanBkli</author>
+// <created>13/03/2026</created>
 // -----------------------------------------------------------------------------
 
 using Alma.DiscordBot.Api.Core.Abstractions.Interfaces;
 using Alma.DiscordBot.Api.Core.Abstractions.ValueObjects;
+using Alma.DiscordBot.Api.Core.Domain.ValueObjects;
 
 namespace Alma.DiscordBot.Api.Core.Domain.Entities
 {
@@ -37,6 +38,7 @@ namespace Alma.DiscordBot.Api.Core.Domain.Entities
     /// <seealso cref="IAuditable"/>
     /// <seealso cref="ISoftDeletable"/>
     /// <seealso cref="User"/>
+    /// <seealso cref="RiotId"/>
     public sealed class Player : IIdentifiable<Uuid>, IAuditable, ISoftDeletable
     {
         // -------------------------------------------------------------------------
@@ -58,10 +60,10 @@ namespace Alma.DiscordBot.Api.Core.Domain.Entities
         /// Gets the Riot Games identifier of this player.
         /// </summary>
         /// <value>
-        /// A <see cref="string"/> in the format <c>Pseudo#TAG</c> representing
-        /// the player's Riot ID.
+        /// A <see cref="RiotId"/> representing the player's Riot ID
+        /// in the format <c>GameName#TagLine</c>.
         /// </value>
-        public string RiotId { get; init; } = string.Empty;
+        public RiotId RiotId { get; init; }
 
         /// <summary>
         /// Gets the Riot Games PUUID of this player.

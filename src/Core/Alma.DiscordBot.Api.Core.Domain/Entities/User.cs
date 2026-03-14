@@ -1,9 +1,9 @@
 // -----------------------------------------------------------------------------
-// <copyright file="User.cs" company="$projectname$">
-//   Copyright (c) $projectname$. All rights reserved.
+// <copyright file="AuditLog.cs" company="Alma.DiscordBot.Api.Core.Domain">
+//   Copyright (c) Alma.DiscordBot.Api.Core.Domain All rights reserved.
 // </copyright>
-// <author>$author$</author>
-// <created>13/03/2026 15:57:56</created>
+// <author>iMeanBkli</author>
+// <created>13/03/2026</created>
 // -----------------------------------------------------------------------------
 
 using Alma.DiscordBot.Api.Core.Abstractions.Interfaces;

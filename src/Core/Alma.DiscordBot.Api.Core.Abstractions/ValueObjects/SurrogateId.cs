@@ -50,7 +50,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.ValueObjects
         {
             if (value <= 0)
             {
-                throw new ArgumentException("Surrogate Id value must be greater than zero.", nameof(value));
+                throw new ArgumentException(ErrorMessages.ID_BELLOW_ZERO_ERROR_MESSAGE, nameof(value));
             }
 
             Value = value;
@@ -142,5 +142,17 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.ValueObjects
         /// Thrown when <paramref name="value"/> is zero or negative.
         /// </exception>
         public static explicit operator SurrogateId(int value) => new(value);
+
+        // -------------------------------------------------------------------------
+        // Messages
+        // -------------------------------------------------------------------------
+
+        /// <summary>
+        /// Provides error messages for <see cref="SurrogateId"/> validation failures.
+        /// </summary>
+        private static class ErrorMessages
+        {
+            internal const string ID_BELLOW_ZERO_ERROR_MESSAGE = "Surrogate Id value must be greater than zero.";
+        }
     }
 }
