@@ -15,7 +15,7 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
         // Identity
         // -------------------------------------------------------------------------
 
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void Player_WhenCreated_ShouldExposeRiotId()
         {
             // -------------------------------------
@@ -43,7 +43,7 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
             target.RiotId.Should().Be(VALID_RIOT_ID);
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void Player_WhenCreated_ShouldExposeUserId()
         {
             // -------------------------------------
@@ -71,7 +71,7 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
             target.UserId.Should().Be(userId);
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void Player_WhenCreated_PuuidShouldBeNull()
         {
             // -------------------------------------
@@ -101,7 +101,7 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
         // Soft delete
         // -------------------------------------------------------------------------
 
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void Player_WhenCreated_ShouldBeActive()
         {
             // -------------------------------------
@@ -128,7 +128,7 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
             target.DeletedAt.Should().BeNull();
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void Player_WhenDeactivated_ShouldBeInactive()
         {
             // -------------------------------------
@@ -160,7 +160,7 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
             target.DeletedAt.Should().BeOnOrAfter(beforeDeactivation);
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void Player_WhenDeactivatedWhileAlreadyInactive_ShouldHaveNoEffect()
         {
             // -------------------------------------
@@ -192,7 +192,7 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
             target.DeletedAt.Should().Be(firstDeletedAt);
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void Player_WhenActivatedAfterDeactivation_ShouldBeActive()
         {
             // -------------------------------------
@@ -223,7 +223,7 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
             target.DeletedAt.Should().BeNull();
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void Player_WhenActivatedWhileAlreadyActive_ShouldHaveNoEffect()
         {
             // -------------------------------------

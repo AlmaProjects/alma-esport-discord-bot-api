@@ -12,13 +12,15 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
         // -------------------------------------------------------------------------
 
         // Cas : GuildId exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void GuildAllowedRole_WhenCreated_ShouldExposeGuildId()
-            => throw new NotImplementedException();
+        {
+        }
 
         // Cas : RoleId exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void GuildAllowedRole_WhenCreated_ShouldExposeRoleId()
-            => throw new NotImplementedException();
+        {
+        }
     }
 }

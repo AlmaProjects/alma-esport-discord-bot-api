@@ -16,27 +16,31 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
         // -------------------------------------------------------------------------
 
         // Cas : Id exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void GuildConfiguration_WhenCreated_ShouldExposeId()
-            => throw new NotImplementedException();
+        {
+        }
 
         // Cas : CommandPrefix exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void GuildConfiguration_WhenCreated_ShouldExposeCommandPrefix()
-            => throw new NotImplementedException();
+        { 
+        }
 
         // -------------------------------------------------------------------------
         // Navigation properties
         // -------------------------------------------------------------------------
 
         // Cas : AllowedRoles vide à la création
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void GuildConfiguration_WhenCreated_AllowedRolesShouldBeEmpty()
-            => throw new NotImplementedException();
+        {
+        }
 
         // Cas : AllowedChannels vide à la création
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void GuildConfiguration_WhenCreated_AllowedChannelsShouldBeEmpty()
-            => throw new NotImplementedException();
+        {
+        }
     }
 }

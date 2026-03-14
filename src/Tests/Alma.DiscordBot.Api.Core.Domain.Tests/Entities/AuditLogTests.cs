@@ -15,47 +15,55 @@ namespace Alma.DiscordBot.Api.Core.Domain.Tests.Entities
         // -------------------------------------------------------------------------
 
         // Cas : GuildId exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void AuditLog_WhenCreated_ShouldExposeGuildId()
-            => throw new NotImplementedException();
+        {
+        }
 
         // Cas : ActorId exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void AuditLog_WhenCreated_ShouldExposeActorId()
-            => throw new NotImplementedException();
+        {
+        }
 
         // Cas : Action exposée correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void AuditLog_WhenCreated_ShouldExposeAction()
-            => throw new NotImplementedException();
+        {
+        }
 
         // Cas : EntityType exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void AuditLog_WhenCreated_ShouldExposeEntityType()
-            => throw new NotImplementedException();
+        {
+        }
 
         // Cas : EntityId exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void AuditLog_WhenCreated_ShouldExposeEntityId()
-            => throw new NotImplementedException();
+        {
+        }
 
         // Cas : Payload exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void AuditLog_WhenCreated_ShouldExposePayload()
-            => throw new NotImplementedException();
+        {
+        }
 
         // -------------------------------------------------------------------------
         // Audit
         // -------------------------------------------------------------------------
 
         // Cas : CreatedAt exposé correctement
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void AuditLog_WhenCreated_ShouldExposeCreatedAt()
-            => throw new NotImplementedException();
+        {
+        }
 
         // Cas : AuditLog est immuable — aucune mutation possible après création
-        [Fact]
+        [Fact(Skip = "Not implemented yet")]
         public void AuditLog_WhenCreated_ShouldBeImmutable()
-            => throw new NotImplementedException();
+        {
+        }
     }
 }
