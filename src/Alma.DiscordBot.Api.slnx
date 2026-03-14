@@ -7,6 +7,9 @@
     <Project Path="Core/Alma.DiscordBot.Api.Core.Domain/Alma.DiscordBot.Api.Core.Domain.csproj" Id="600ca84e-713e-4511-a988-5411e39bc27f" />
     <Project Path="Core/Alma.DiscordBot.Api.Core/Alma.DiscordBot.Api.Core.csproj" Id="d0c1fb8b-0cf1-490b-a672-3fdaabdb97a3" />
   </Folder>
+  <Folder Name="/Framework/">
+    <Project Path="Framework/Alma.DiscordBot.Api.Framework/Alma.DiscordBot.Api.Framework.csproj" Id="c7bd7678-32a3-4607-999c-d49b8b366e42" />
+  </Folder>
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/Alma.DiscordBot.Api.Infrastructure/Alma.DiscordBot.Api.Infrastructure.csproj" Id="7ee1d7e1-f056-47ea-a4ac-1c71710b9692" />
   </Folder>

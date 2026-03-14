@@ -77,7 +77,7 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.ValueObjects
         {
             if (value < DISCORD_FIRST_SNOWFLAKE_ID)
             {
-                throw new ArgumentException($"Snowflake value must be greater than Discord first generated ID : { DISCORD_FIRST_SNOWFLAKE_ID }.", nameof(value));
+                throw new ArgumentException(ErrorMessages.SnowflakeBellowMinimumValue(), nameof(value));
             }
 
             Value = value;
@@ -166,5 +166,18 @@ namespace Alma.DiscordBot.Api.Core.Abstractions.ValueObjects
         /// otherwise <see langword="false"/>.
         /// </returns>
         public static bool operator !=(Snowflake left, Snowflake right) => !left.Equals(right);
+
+        // -------------------------------------------------------------------------
+        // Messages
+        // -------------------------------------------------------------------------
+
+        /// <summary>
+        /// Provides error messages for <see cref="Snowflake"/> validation failures.
+        /// </summary>
+        private static class ErrorMessages
+        {
+            internal static string SnowflakeBellowMinimumValue() => $"Snowflake value must be greater than Discord " +
+                $"first generated ID : {DISCORD_FIRST_SNOWFLAKE_ID}.";
+        }
     }
 }
