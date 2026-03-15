@@ -1,0 +1,21 @@
+services:
+    postgres:
+        image: postgres:17
+        container_name: alma_discordbot_db
+        environment:
+            POSTGRES_DB: alma_discordbot_dev
+            POSTGRES_USER: alma
+            POSTGRES_PASSWORD: alma_dev_password
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U alma -d alma_discordbot_dev"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+volumes:
+    postgres_data:
+        name: alma_discordbot_postgres_data
